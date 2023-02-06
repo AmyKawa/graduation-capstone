@@ -1,3 +1,6 @@
+# Amy
+# Capstone Grade 12 Project
+
 import pygame, random, sys, time, clock
 
 screen = pygame.display.set_mode((1229, 922))
