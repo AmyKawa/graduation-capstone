@@ -472,7 +472,7 @@ c_emotion = 'n'
 h_emotion = 'n'
 antag_emotion = 'n'
 dialogue_line = 1
-phase = 'dialogue'
+phase = 'fight'
 pygame.mixer.music.load('assets\\whale.mp3')
 pygame.mixer.music.play(-1)
 while rungame:
@@ -588,7 +588,7 @@ while rungame:
 
 	if phase == 'fight':
 		display_stats()
-		# ~ text('PENELOPE HEART:' + str(int(Penelope.gethearts())), 350, 450, 50, 255, 255, 255)
+		# ~ text('PENELOPE HEART:' + str(int(Penelope.gethearts())), 350, 550, 50, 255, 255, 255)
 		# ~ text('PENELOPE JUICE:' + str(int(Penelope.getjuice())), 350, 500, 50, 255, 255, 255)
 		
 		pygame.draw.rect(screen, (255, 255, 255), (50, 50, 230, 320), 5)
@@ -1165,16 +1165,14 @@ while rungame:
 				antag_emotion = 'n'
 				if turn_index == 3:
 					tick = 0
-					e_move = 1#random.randint(1,5)
+					e_move = random.randint(1,2)
 					e_target = random.choice(snack_selection)
-					print (e_target)
+					print (e_move)
 					stage = 'enemy_move'
 					tick = 0
 				else:
 					turn_index += 1
 					tick = 0
-				
-			tick += 1
 					
 				
 
@@ -1207,14 +1205,20 @@ while rungame:
 						h_emotion = 'hu'
 						if tick < 1:
 							Hazel.took_dmg(Penelope.attack() - (Hazel.defend() / 2))
-				# ~ elif e_move == 2:
-					# ~ text('Penelope barks', 330, 50, 50, 255, 255, 255)
-				# ~ elif e_move == 3:
-					# ~ text('Penelope barks', 330, 50, 50, 255, 255, 255)
-				# ~ elif e_move == 4:
-					# ~ text('Penelope barks', 330, 50, 50, 255, 255, 255)
-				# ~ elif e_move == 5:
-					# ~ text('Penelope barks', 330, 50, 50, 255, 255, 255)
+				elif e_move == 2:
+					text('PENELOPE throws his hammer!', 330, 50, 50, 255, 255, 255)
+					text('All allies took a hit!', 330, 100, 50, 255, 255, 255)
+					s_emotion = 'hu'
+					a_emotion = 'hu'
+					c_emotion = 'hu'
+					h_emotion = 'hu'
+					if tick < 1:
+						Skyler.took_dmg(50)
+						Hazel.took_dmg(50)
+						Axel.took_dmg(50)
+						Coen.took_dmg(50)
+						if skyler_canendure == True and Skyler.gethearts() <= 1:
+							text('SKYLER endured the hit...', 400, 150, 50, 255, 255, 255)
 				
 				if skyler_canendure == True:
 					if Skyler.gethearts() == 0:
@@ -1235,7 +1239,7 @@ while rungame:
 				
 			#if tick < 1:
 		
-			tick += 1
+	tick += 1
 	
 	cursorX, cursorY = pygame.mouse.get_pos()
 	if pygame.mouse.get_pressed()[0] == 1:
